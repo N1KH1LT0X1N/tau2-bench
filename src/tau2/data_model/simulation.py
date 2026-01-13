@@ -256,7 +256,7 @@ class RewardInfo(BaseModel):
         Optional[list[RewardType]],
         Field(
             description="The basis of the reward. Fields that are used to calculate the reward.",
-            default_factory=lambda: [RewardType.DB],
+            default_factory=lambda: [RewardType.DB, RewardType.COMMUNICATE, RewardType.ACTION],
         ),
     ]
     reward_breakdown: Annotated[

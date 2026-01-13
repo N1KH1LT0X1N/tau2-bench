@@ -56,6 +56,14 @@ def analyze_reward(
             )
         else:
             db_success = None
+        if RewardType.ACTION in reward_info.reward_basis:
+            action_success = (
+                is_successful(reward_breakdown[RewardType.ACTION])
+                if reward_breakdown is not None
+                else 0
+            )
+        else:
+            action_success = None
     except Exception as e:
         print("failure")
         print(reward_info)
@@ -78,6 +86,7 @@ def analyze_reward(
         "communication": communicate_success,
         "environment": env_success,
         "database": db_success,
+        "action": action_success,
         "num_correct_write_action": num_successful_write_checks,
         "num_write_action": num_write_checks,
     }
