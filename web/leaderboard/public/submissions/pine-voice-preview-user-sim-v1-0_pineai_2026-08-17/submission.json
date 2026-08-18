@@ -3,8 +3,13 @@
   "model_organization": "Pine AI",
   "submitting_organization": "Pine AI",
   "submission_date": "2026-08-17",
-  "submission_type": "custom",
+  "submission_type": "standard",
   "modality": "voice",
+  "model_release": {
+    "release_date": "2026-08-10",
+    "announcement_url": "https://www.19pine.ai/blog/pine-ai-the-most-natural-human-computer-interface-is-your-voice",
+    "announcement_title": "Pine AI: The most natural human-computer interface is your voice"
+  },
   "contact_info": {
     "email": "arvinx@19pine.ai",
     "name": "Arvin Xu",
@@ -33,6 +38,11 @@
       "title": "Pine AI",
       "url": "https://19pine.ai",
       "type": "other"
+    },
+    {
+      "title": "Pine AI: The most natural human-computer interface is your voice",
+      "url": "https://www.19pine.ai/blog/pine-ai-the-most-natural-human-computer-interface-is-your-voice",
+      "type": "blog_post"
     }
   ],
   "methodology": {
@@ -42,9 +52,9 @@
     "verification": {
       "modified_prompts": false,
       "omitted_questions": false,
-      "details": "Standard tau-voice agent prompt, user-simulator prompt, domain policies (data/tau2/domains/<domain>/policy.md), tool schemas, tool results, and evaluator are byte-identical to upstream -- no file in the tau-voice repo is modified. The agent additionally receives a prepended scaffold system message defining each agent's identity and role (real-time voice agent vs. background tool-calling agent), the responsibilities it owns, and how the two coordinate and share context. Sierra independently ran the full base splits: retail 114, airline 50, telecom 114; 1 trial per task at regular speech complexity; no task omitted. The single telecom infrastructure error is retained as a non-pass, preserving the 114-task denominator. User-side voices are local ElevenLabs personas from setup_voices (not Sierra-managed submission voices)."
+      "details": "Standard tau-voice agent prompt, user-simulator prompt, domain policies (data/tau2/domains/<domain>/policy.md), tool schemas, tool results, and evaluator are byte-identical to upstream -- no file in the tau-voice repo is modified. Sierra independently ran the full base splits: retail 114, airline 50, telecom 114; 1 trial per task at regular speech complexity; no task omitted. The single telecom infrastructure error is retained as a non-pass, preserving the 114-task denominator. User-side voices are local ElevenLabs personas from setup_voices (not Sierra-managed submission voices)."
     },
-    "notes": "Custom submission from Pine AI, independently evaluated by Sierra. The agent is a two-agent system: (1) a voice agent handling real-time speech via a customized ASR -> LLM -> TTS pipeline coordinated by a custom interaction model that governs turn-taking, backchanneling, and other conversational dynamics; (2) a background agent (gemini-3.5-flash) that issues the tool calls for the operational task. The two agents share context.\nAll voice-side models are the same production models serving 19pine.ai -- not benchmark-trained. No files in this tau-voice repo are modified. On top of the standard tau-voice agent system prompt, Pine prepends an additional scaffold system message that defines each agent's identity and role (the real-time voice agent vs. the background tool-calling agent), the responsibilities each one owns, and how the two coordinate and share context.\nSierra independently evaluated the full base splits on all three domains (retail 114, airline 50, telecom 114), 1 trial per task, --speech-complexity regular. User simulator is the standard v1.0 pipeline (gpt-4.1). The single telecom infrastructure error is counted as a non-pass, so the denominator remains 114. User-side voices are local ElevenLabs personas created via the standard setup_voices script; not Sierra-managed submission voices.\nA companion independently evaluated result uses gpt-5.5-2026-04-23 at reasoning_effort=xhigh as the user-simulator LLM."
+    "notes": "Standard submission from Pine AI, independently evaluated by Sierra. The system uses two agents: (1) a voice agent handling real-time speech via a customized ASR -> LLM -> TTS pipeline coordinated by a custom interaction model that governs turn-taking, backchanneling, and other conversational dynamics; (2) a background agent (gemini-3.5-flash) that issues the tool calls for the operational task. The two agents share context.\nAll voice-side models are the same production models serving 19pine.ai -- not benchmark-trained. No files in the tau-voice repository are modified. Pine prepends a scaffold system message that defines its internal agents' identities, responsibilities, and coordination.\nSierra independently evaluated the full base splits on all three domains (retail 114, airline 50, telecom 114), 1 trial per task, --speech-complexity regular. User simulator is the standard v1.0 pipeline (gpt-4.1). The single telecom infrastructure error is counted as a non-pass, so the denominator remains 114. User-side voices are local ElevenLabs personas created via the standard setup_voices script; not Sierra-managed submission voices.\nA companion custom result uses gpt-5.5-2026-04-23 at reasoning_effort=xhigh as the user-simulator LLM."
   },
   "voice_config": {
     "provider": "Pine AI",
